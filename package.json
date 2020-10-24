@@ -1,0 +1,30 @@
+{
+  "name": "lern-webhook",
+  "version": "1.0.0",
+  "description": "lern messenger webhook",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fbsamples/messenger-platform-samples.git"
+  },
+  "author": "Facebook",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "body-parser": "^1.15.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.13.4",
+    "querystring": "^0.2.0"
+  },
+  "engines": {
+    "node": "~4.1.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1"
+  }
+}
