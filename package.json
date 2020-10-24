@@ -13,12 +13,11 @@
   "author": "Facebook",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.0",
+    "@nuxtjs/axios": "5.3.6",
     "body-parser": "^1.15.0",
     "dotenv": "^8.2.0",
     "express": "^4.13.4",
-    "qs": "^6.9.4",
-    "querystring": "^0.2.0"
+    "qs": "^6.9.4"
   },
   "engines": {
     "node": "~4.1.2"
