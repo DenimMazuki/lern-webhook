@@ -8,7 +8,7 @@ const { PAGE_ACCESS_TOKEN } = process.env;
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const querystring = require('querystring');
+const qs = require('qs');
 
 const app = express().use(bodyParser.json());
 
@@ -21,7 +21,7 @@ function callSendApi(senderPsid, responseMessage) {
       id: senderPsid,
     },
     message: responseMessage,
-  }, querystring.stringify({ access_token: PAGE_ACCESS_TOKEN }))
+  }, qs.stringify({ access_token: PAGE_ACCESS_TOKEN }))
     .then((response) => {
       console.log('Message sent! ', response);
     })
