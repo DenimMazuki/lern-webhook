@@ -21,7 +21,9 @@ function callSendApi(senderPsid, responseMessage) {
       id: senderPsid,
     },
     message: responseMessage,
-  }, qs.stringify({ access_token: PAGE_ACCESS_TOKEN }))
+  }, {
+    headers: { Authorization: `Bearer ${PAGE_ACCESS_TOKEN}` },
+  })
     .then((response) => {
       console.log('Message sent! ', response);
     })
