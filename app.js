@@ -8,7 +8,6 @@ const { PAGE_ACCESS_TOKEN } = process.env;
 const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-const qs = require('qs');
 
 const app = express().use(bodyParser.json());
 
@@ -40,16 +39,52 @@ function handleMessage(senderPsid, receivedMessage) {
   if (receivedMessage.text) {
     // Create payload for basic text message
     response = {
-      text: `You sent the message: "${receivedMessage.text}". Now send me an image!`,
+      text: 'Hi there! More to come soon, watch this space 👀',
     };
-
-    callSendApi(senderPsid, response);
+  } else if (receivedMessage.attachments) {
+    // Get the URL of the attachment
+    const attachmentUrl = receivedMessage.attachments[0].payload.url;
+    response = {
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'generic',
+          elements: [{
+            title: 'Is this the right picture?',
+            subtitle: 'Tap a button to answer.',
+            image_url: attachmentUrl,
+            buttons: [
+              {
+                type: 'postback',
+                title: 'Yes!',
+                payload: 'yes',
+              },
+              {
+                type: 'postback',
+                title: 'No!',
+                payload: 'no',
+              },
+            ],
+          }],
+        },
+      },
+    };
   }
+  callSendApi(senderPsid, response);
 }
 
 // Handles messagingPostback events
-function handlePostback(senderPsid, receviedPostback) {
+function handlePostback(senderPsid, receivedPostback) {
+  let response;
 
+  const { payload } = receivedPostback;
+
+  if (payload === 'yes') {
+    response = { text: 'Thanks!' };
+  } else if (payload === 'no') {
+    response = { text: 'Oops, try sending another image' };
+  }
+  callSendApi(senderPsid, response);
 }
 
 app.post('/webhook', (req, res) => {
